@@ -35,13 +35,20 @@ function moves_strings(move) {
 
 function game_outcome_string(outcome,player_move_string,computer_move_string) {
     if (outcome == 1) {
-        return `You win! ${player_move_string} beats ${computer_move_string}.`;
+        return ` You win! ${player_move_string} beats ${computer_move_string} `;
     } else if (outcome == 0) {
-        return `You lose! ${computer_move_string} beats ${player_move_string}.`;
+        return ` You lose! ${computer_move_string} beats ${player_move_string} `;
     } else {
-        return `It's a tie! ${player_move_string} equals ${computer_move_string}.`;
+        return ` It's a tie! ${player_move_string} equals ${computer_move_string} `;
     }
 }
+
+
+const player_points = [];
+const computer_points = [];
+const ties = [];
+
+const outcomes_stings = [];
 
 function game() {    
     
@@ -53,25 +60,24 @@ function game() {
     const computer_move_string = moves_strings(computer_move);
     const final_outcome = game_outcome_string(outcome,player_move_string,computer_move_string);
     
-    return outcome;
-}
-
-const player_points = [];
-const computer_points = [];
-const ties = [];
-
-for (let i = 1; i <= 5; i++) {
-    const game1 = game();
-
-    if(game1 == 1) {
+    if(outcome == 1) {
         player_points.push(1)
-    } else if (game1 == 0) {
+    } else if (outcome == 0) {
         computer_points.push(1)
     } else {
         ties.push(1)
     }
+    
+   outcomes_stings.push(final_outcome);
+
 }
 
+for (let i = 1; i <= 5; i++) {
+    game();
+}
+
+
+console.log(`Round outcomes: ${outcomes_stings}.`);
 console.log(`Player points: ${player_points.length}.`);
 console.log(`Computer points: ${computer_points.length}.`);
 console.log(`Ties: ${ties.length}.`);
